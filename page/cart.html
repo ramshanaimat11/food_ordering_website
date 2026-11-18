@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Tasty Bites</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="brand">
+                <i class="fas fa-fire-flame-curved"></i> TASTY<span>BITES</span>
+            </a>
+            <nav class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="cart.html" class="active">Cart</a>
+                <a href="profile.html" class="profile-btn"><i class="fas fa-user"></i></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="cart-top-bar">
+            <a href="menu.html" class="back-btn"><i class="fas fa-arrow-left"></i> Continue Browsing Menu</a>
+            <h1>Shopping Cart</h1>
+        </div>
+
+        <div class="cart-grid">
+            <!-- Left: Cart Items -->
+            <div class="cart-items-panel">
+                <div class="panel-header">
+                    <h3>Selected Dishes (<span id="totalItemsCount">0</span>)</h3>
+                    <button id="clearCartBtn" class="text-danger-btn">Clear All</button>
+                </div>
+                <div id="cartItemsContainer">
+                    <!-- Cart items dynamically render honge -->
+                </div>
+            </div>
+
+            <!-- Right: Automatic Bill Calculator -->
+            <aside class="checkout-panel">
+                <h3>Order Summary</h3>
+
+                <!-- Promo Code -->
+                <div class="promo-box">
+                    <label>Have a Promo Code?</label>
+                    <div class="promo-row">
+                        <input type="text" id="promoInput" placeholder="Try TASTY20 or SAVE10">
+                        <button id="applyPromoBtn">Apply</button>
+                    </div>
+                    <p id="promoFeedback" class="promo-msg"></p>
+                </div>
+
+                <!-- Delivery Option -->
+                <div class="delivery-toggle">
+                    <label>
+                        <input type="radio" name="deliveryType" value="5.00" checked> Standard Delivery ($5.00)
+                    </label>
+                    <label>
+                        <input type="radio" name="deliveryType" value="0.00"> Self Pickup ($0.00)
+                    </label>
+                </div>
+
+                <!-- Live Price Breakdown -->
+                <div class="price-breakdown">
+                    <div class="price-row">
+                        <span>Subtotal</span>
+                        <span id="subtotalAmount">$0.00</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Delivery Fee</span>
+                        <span id="deliveryAmount">$5.00</span>
+                    </div>
+                    <div class="price-row">
+                        <span>GST / Tax (8%)</span>
+                        <span id="taxAmount">$0.00</span>
+                    </div>
+                    <div class="price-row discount" id="discountRow" style="display: none;">
+                        <span>Promo Discount</span>
+                        <span id="discountAmount">-$0.00</span>
+                    </div>
+                    <div class="price-row grand-total">
+                        <span>Total Payable</span>
+                        <span id="totalAmount">$0.00</span>
+                    </div>
+                </div>
+
+                <button class="primary-btn full-width checkout-cta" id="proceedCheckoutBtn">
+                    Proceed to Checkout <i class="fas fa-arrow-right"></i>
+                </button>
+            </aside>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/cart.js"></script>
+</body>
+</html>

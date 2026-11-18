@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Bites | Order Fresh Food Online</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="brand">
+                <i class="fas fa-fire-flame-curved"></i> TASTY<span>BITES</span>
+            </a>
+
+            <div class="nav-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search for burgers, pizza, sushi, deals...">
+                <button id="clearSearch" class="clear-btn" style="display:none;"><i class="fas fa-times"></i></button>
+            </div>
+
+            <nav class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="menu.html" class="active">Menu</a>
+                <a href="order-history.html">Orders</a>
+                <button class="cart-trigger-btn" id="openCartDrawer">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Cart</span>
+                    <span class="badge" id="navCartCount">0</span>
+                </button>
+                <a href="profile.html" class="profile-btn"><i class="fas fa-user"></i></a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Promotional Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <span class="promo-tag">🔥 20% OFF ON FIRST ORDER — USE CODE: <strong>TASTY20</strong></span>
+            <h1>Craving Something Delicious?</h1>
+            <p>Hot, fresh meals prepared by top chefs and delivered straight to your doorstep in 30 minutes.</p>
+            <div class="hero-stats">
+                <span><i class="fas fa-star"></i> 4.9 (2,400+ Reviews)</span>
+                <span><i class="fas fa-clock"></i> 25-35 Mins Delivery</span>
+                <span><i class="fas fa-shield-alt"></i> 100% Fresh Ingredients</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Wrapper -->
+    <main class="container">
+        
+        <!-- Categories Bar -->
+        <section class="categories-bar">
+            <div class="cat-pills" id="categoryPills">
+                <button class="cat-pill active" data-category="All"><i class="fas fa-utensils"></i> All Items</button>
+                <button class="cat-pill" data-category="Burger"><i class="fas fa-hamburger"></i> Burgers</button>
+                <button class="cat-pill" data-category="Pizza"><i class="fas fa-pizza-slice"></i> Wood-Fired Pizza</button>
+                <button class="cat-pill" data-category="Asian"><i class="fas fa-bowl-rice"></i> Asian & Sushi</button>
+                <button class="cat-pill" data-category="Healthy"><i class="fas fa-leaf"></i> Healthy Bowls</button>
+                <button class="cat-pill" data-category="Desserts"><i class="fas fa-ice-cream"></i> Desserts & Drinks</button>
+            </div>
+
+            <div class="sort-box">
+                <label for="sortSelect">Sort by:</label>
+                <select id="sortSelect">
+                    <option value="popular">Most Popular</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Recent Searches Strip -->
+        <div class="recent-bar" id="recentSearchBar">
+            <span class="recent-label"><i class="fas fa-history"></i> Recent:</span>
+            <div id="recentSearchTags" class="recent-tags"></div>
+        </div>
+
+        <!-- Food Menu Grid -->
+        <section class="menu-section">
+            <div class="section-header">
+                <h2 id="menuHeading">All Menu Items</h2>
+                <span id="itemCountText" class="count-text">Showing 8 items</span>
+            </div>
+
+            <div class="food-grid" id="foodGrid">
+                <!-- Dynamic Food Cards JS se aayenge -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Dish Customization Modal (Real-Time Popup) -->
+    <div class="modal-overlay" id="itemModal">
+        <div class="modal-box">
+            <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
+            <img id="modalImg" src="" alt="Food Image">
+            <div class="modal-body">
+                <div class="modal-title-row">
+                    <h3 id="modalTitle">Dish Name</h3>
+                    <span class="modal-price" id="modalPrice">$0.00</span>
+                </div>
+                <p id="modalDesc" class="modal-desc"></p>
+
+                <div class="option-group">
+                    <h4>Choose Portion Size</h4>
+                    <label class="radio-option">
+                        <input type="radio" name="size" value="0" checked> Regular (Standard) <span>+$0.00</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="size" value="3.50"> Large Meal (Extra Fries & Drink) <span>+$3.50</span>
+                    </label>
+                </div>
+
+                <div class="option-group">
+                    <h4>Special Kitchen Instructions</h4>
+                    <input type="text" id="specialNote" placeholder="e.g. Extra spicy, no onions, extra sauce...">
+                </div>
+
+                <button class="primary-btn full-width" id="modalAddBtn">
+                    Add to Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real-Time Slide-Over Cart Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Order</h3>
+            <button id="closeCartDrawer"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="drawer-items" id="drawerItemsList">
+            <!-- Cart items yahan live update honge -->
+        </div>
+
+        <div class="drawer-footer">
+            <div class="drawer-summary">
+                <div class="summary-line"><span>Subtotal</span><span id="drawerSubtotal">$0.00</span></div>
+                <div class="summary-line"><span>Tax (8%)</span><span id="drawerTax">$0.00</span></div>
+                <div class="summary-line total"><span>Estimated Total</span><span id="drawerTotal">$0.00</span></div>
+            </div>
+            <div class="drawer-actions">
+                <a href="cart.html" class="secondary-btn">View Full Cart</a>
+                <a href="checkout.html" class="primary-btn">Checkout Now</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Item added to cart!</div>
+
+    <script src="../js/menu.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>
