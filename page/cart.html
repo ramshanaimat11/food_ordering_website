@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart | Tasty Bites</title>
+    <title>Your Cart | Food Hub</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,7 +13,7 @@
     <header class="navbar">
         <div class="nav-container">
             <a href="home.html" class="brand">
-                <i class="fas fa-fire-flame-curved"></i> TASTY<span>BITES</span>
+                <i class="fas fa-fire-flame-curved"></i> FOOD<span>HUB</span>
             </a>
             <nav class="nav-links">
                 <a href="home.html">Home</a>
@@ -50,7 +50,7 @@
                 <div class="promo-box">
                     <label>Have a Promo Code?</label>
                     <div class="promo-row">
-                        <input type="text" id="promoInput" placeholder="Try TASTY20 or SAVE10">
+                        <input type="text" id="promoInput" placeholder="Try HUB20 or SAVE10">
                         <button id="applyPromoBtn">Apply</button>
                     </div>
                     <p id="promoFeedback" class="promo-msg"></p>
@@ -59,10 +59,10 @@
                 <!-- Delivery Option -->
                 <div class="delivery-toggle">
                     <label>
-                        <input type="radio" name="deliveryType" value="5.00" checked> Standard Delivery ($5.00)
+                        <input type="radio" name="deliveryType" value="150" checked> Standard Delivery (Rs. 150)
                     </label>
                     <label>
-                        <input type="radio" name="deliveryType" value="0.00"> Self Pickup ($0.00)
+                        <input type="radio" name="deliveryType" value="0"> Self Pickup (Rs. 0)
                     </label>
                 </div>
 
@@ -70,23 +70,23 @@
                 <div class="price-breakdown">
                     <div class="price-row">
                         <span>Subtotal</span>
-                        <span id="subtotalAmount">$0.00</span>
+                        <span id="subtotalAmount">Rs. 0</span>
                     </div>
                     <div class="price-row">
                         <span>Delivery Fee</span>
-                        <span id="deliveryAmount">$5.00</span>
+                        <span id="deliveryAmount">Rs. 150</span>
                     </div>
                     <div class="price-row">
                         <span>GST / Tax (8%)</span>
-                        <span id="taxAmount">$0.00</span>
+                        <span id="taxAmount">Rs. 0</span>
                     </div>
                     <div class="price-row discount" id="discountRow" style="display: none;">
                         <span>Promo Discount</span>
-                        <span id="discountAmount">-$0.00</span>
+                        <span id="discountAmount">-Rs. 0</span>
                     </div>
                     <div class="price-row grand-total">
                         <span>Total Payable</span>
-                        <span id="totalAmount">$0.00</span>
+                        <span id="totalAmount">Rs. 0</span>
                     </div>
                 </div>
 

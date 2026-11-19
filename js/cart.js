@@ -1,5 +1,9 @@
 let discountPercent = 0;
 
+function formatPrice(amount) {
+    return `Rs. ${Math.round(amount).toLocaleString()}`;
+}
+
 function renderCartPage() {
     const cart = JSON.parse(localStorage.getItem("foodCart")) || [];
     const container = document.getElementById("cartItemsContainer");
@@ -24,7 +28,7 @@ function renderCartPage() {
                 <div class="cart-row-info">
                     <h4>${item.name}</h4>
                     <small>Size: ${item.size} ${item.note ? `| Note: ${item.note}` : ""}</small>
-                    <strong style="color:#ff5722;">$${(item.price * item.quantity).toFixed(2)}</strong>
+                    <strong style="color:#ff5722;">${formatPrice(item.price * item.quantity)}</strong>
                 </div>
                 <div class="qty-controls">
                     <button onclick="changeQty(${index}, -1)">-</button>
@@ -70,30 +74,30 @@ function calculateBill(cart) {
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const deliverySelect = parseFloat(document.querySelector('input[name="deliveryType"]:checked').value);
     const deliveryFee = subtotal > 0 ? deliverySelect : 0;
-    const tax = subtotal * 0.08;
-    const discount = subtotal * discountPercent;
+    const tax = Math.round(subtotal * 0.08);
+    const discount = Math.round(subtotal * discountPercent);
     const total = subtotal + deliveryFee + tax - discount;
 
-    document.getElementById("subtotalAmount").textContent = `$${subtotal.toFixed(2)}`;
-    document.getElementById("deliveryAmount").textContent = `$${deliveryFee.toFixed(2)}`;
-    document.getElementById("taxAmount").textContent = `$${tax.toFixed(2)}`;
+    document.getElementById("subtotalAmount").textContent = formatPrice(subtotal);
+    document.getElementById("deliveryAmount").textContent = formatPrice(deliveryFee);
+    document.getElementById("taxAmount").textContent = formatPrice(tax);
 
     const discountRow = document.getElementById("discountRow");
     if (discountPercent > 0 && subtotal > 0) {
         discountRow.style.display = "flex";
-        document.getElementById("discountAmount").textContent = `-$${discount.toFixed(2)}`;
+        document.getElementById("discountAmount").textContent = `-${formatPrice(discount)}`;
     } else {
         discountRow.style.display = "none";
     }
 
-    document.getElementById("totalAmount").textContent = `$${total.toFixed(2)}`;
+    document.getElementById("totalAmount").textContent = formatPrice(total);
 
     localStorage.setItem("orderSummary", JSON.stringify({
-        subtotal: subtotal.toFixed(2),
-        deliveryFee: deliveryFee.toFixed(2),
-        tax: tax.toFixed(2),
-        discount: discount.toFixed(2),
-        total: total.toFixed(2)
+        subtotal: Math.round(subtotal),
+        deliveryFee: Math.round(deliveryFee),
+        tax: tax,
+        discount: discount,
+        total: Math.round(total)
     }));
 }
 
@@ -101,7 +105,7 @@ document.getElementById("applyPromoBtn").addEventListener("click", () => {
     const code = document.getElementById("promoInput").value.trim().toUpperCase();
     const feedback = document.getElementById("promoFeedback");
 
-    if (code === "TASTY20") {
+    if (code === "HUB20") {
         discountPercent = 0.20;
         feedback.style.color = "#10b981";
         feedback.textContent = "Awesome! 20% discount applied.";
@@ -112,7 +116,7 @@ document.getElementById("applyPromoBtn").addEventListener("click", () => {
     } else {
         discountPercent = 0;
         feedback.style.color = "#ef4444";
-        feedback.textContent = "Invalid promo code. Use TASTY20 or SAVE10.";
+        feedback.textContent = "Invalid promo code. Use HUB20 or SAVE10.";
     }
     renderCartPage();
 });

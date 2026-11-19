@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasty Bites | Order Fresh Food Online</title>
+    <title>Food Hub | Order Fresh Food Online</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,7 +14,7 @@
     <header class="navbar">
         <div class="nav-container">
             <a href="home.html" class="brand">
-                <i class="fas fa-fire-flame-curved"></i> TASTY<span>BITES</span>
+                <i class="fas fa-fire-flame-curved"></i> FOOD<span>HUB</span>
             </a>
 
             <div class="nav-search">
@@ -40,7 +40,7 @@
     <!-- Promotional Hero Banner -->
     <section class="hero-banner">
         <div class="hero-content">
-            <span class="promo-tag">🔥 20% OFF ON FIRST ORDER — USE CODE: <strong>TASTY20</strong></span>
+            <span class="promo-tag">🔥 20% OFF ON FIRST ORDER — USE CODE: <strong>HUB20</strong></span>
             <h1>Craving Something Delicious?</h1>
             <p>Hot, fresh meals prepared by top chefs and delivered straight to your doorstep in 30 minutes.</p>
             <div class="hero-stats">
@@ -95,7 +95,7 @@
         </section>
     </main>
 
-    <!-- Dish Customization Modal (Real-Time Popup) -->
+    <!-- Dish Customization Modal -->
     <div class="modal-overlay" id="itemModal">
         <div class="modal-box">
             <button class="close-modal" id="closeModal"><i class="fas fa-times"></i></button>
@@ -103,17 +103,17 @@
             <div class="modal-body">
                 <div class="modal-title-row">
                     <h3 id="modalTitle">Dish Name</h3>
-                    <span class="modal-price" id="modalPrice">$0.00</span>
+                    <span class="modal-price" id="modalPrice">Rs. 0</span>
                 </div>
                 <p id="modalDesc" class="modal-desc"></p>
 
                 <div class="option-group">
                     <h4>Choose Portion Size</h4>
                     <label class="radio-option">
-                        <input type="radio" name="size" value="0" checked> Regular (Standard) <span>+$0.00</span>
+                        <input type="radio" name="size" value="0" checked> Regular (Standard) <span>+Rs. 0</span>
                     </label>
                     <label class="radio-option">
-                        <input type="radio" name="size" value="3.50"> Large Meal (Extra Fries & Drink) <span>+$3.50</span>
+                        <input type="radio" name="size" value="350"> Large Meal (Extra Fries & Drink) <span>+Rs. 350</span>
                     </label>
                 </div>
 
@@ -143,9 +143,9 @@
 
         <div class="drawer-footer">
             <div class="drawer-summary">
-                <div class="summary-line"><span>Subtotal</span><span id="drawerSubtotal">$0.00</span></div>
-                <div class="summary-line"><span>Tax (8%)</span><span id="drawerTax">$0.00</span></div>
-                <div class="summary-line total"><span>Estimated Total</span><span id="drawerTotal">$0.00</span></div>
+                <div class="summary-line"><span>Subtotal</span><span id="drawerSubtotal">Rs. 0</span></div>
+                <div class="summary-line"><span>Tax (8%)</span><span id="drawerTax">Rs. 0</span></div>
+                <div class="summary-line total"><span>Estimated Total</span><span id="drawerTotal">Rs. 0</span></div>
             </div>
             <div class="drawer-actions">
                 <a href="cart.html" class="secondary-btn">View Full Cart</a>

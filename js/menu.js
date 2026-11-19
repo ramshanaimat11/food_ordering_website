@@ -3,7 +3,7 @@ const menuItems = [
         id: 101,
         name: "Smoky Double Smash Burger",
         category: "Burger",
-        price: 12.99,
+        price: 850,
         rating: 4.9,
         prepTime: "20 min",
         badge: "🔥 Bestseller",
@@ -14,7 +14,7 @@ const menuItems = [
         id: 102,
         name: "Wood-Fired Pepperoni Pizza",
         category: "Pizza",
-        price: 15.50,
+        price: 1650,
         rating: 4.8,
         prepTime: "25 min",
         badge: "⭐ Chef's Choice",
@@ -25,7 +25,7 @@ const menuItems = [
         id: 103,
         name: "Grilled Salmon Poke Bowl",
         category: "Asian",
-        price: 16.00,
+        price: 1450,
         rating: 4.9,
         prepTime: "15 min",
         badge: "🥗 Fresh",
@@ -36,7 +36,7 @@ const menuItems = [
         id: 104,
         name: "Crispy Zinger Fillet Burger",
         category: "Burger",
-        price: 10.99,
+        price: 650,
         rating: 4.7,
         prepTime: "18 min",
         badge: "⚡ Popular",
@@ -47,7 +47,7 @@ const menuItems = [
         id: 105,
         name: "Margherita Basil Pizza",
         category: "Pizza",
-        price: 13.50,
+        price: 1350,
         rating: 4.6,
         prepTime: "22 min",
         badge: "🌿 Classic",
@@ -58,7 +58,7 @@ const menuItems = [
         id: 106,
         name: "Mediterranean Avocado Salad",
         category: "Healthy",
-        price: 11.50,
+        price: 950,
         rating: 4.8,
         prepTime: "12 min",
         badge: "💚 Low Cal",
@@ -69,7 +69,7 @@ const menuItems = [
         id: 107,
         name: "Dragon Tempura Sushi Roll",
         category: "Asian",
-        price: 14.99,
+        price: 1550,
         rating: 4.9,
         prepTime: "20 min",
         badge: "🍣 Top Rated",
@@ -80,7 +80,7 @@ const menuItems = [
         id: 108,
         name: "Molten Chocolate Lava Cake",
         category: "Desserts",
-        price: 7.99,
+        price: 550,
         rating: 4.9,
         prepTime: "15 min",
         badge: "🍫 Sweet Treat",
@@ -96,6 +96,10 @@ let selectedModalItem = null;
 const foodGrid = document.getElementById("foodGrid");
 const sortSelect = document.getElementById("sortSelect");
 
+function formatPrice(amount) {
+    return `Rs. ${Math.round(amount).toLocaleString()}`;
+}
+
 // Render Menu Cards
 function renderMenu() {
     let filtered = menuItems.filter(item => {
@@ -106,7 +110,6 @@ function renderMenu() {
         return matchesCat && matchesSearch;
     });
 
-    // Sorting
     const sortBy = sortSelect.value;
     if (sortBy === "price-low") filtered.sort((a, b) => a.price - b.price);
     if (sortBy === "price-high") filtered.sort((a, b) => b.price - a.price);
@@ -131,7 +134,7 @@ function renderMenu() {
             <div class="card-body">
                 <div class="card-title-row">
                     <h3 onclick="openItemModal(${item.id})">${item.name}</h3>
-                    <span class="card-price">$${item.price.toFixed(2)}</span>
+                    <span class="card-price">${formatPrice(item.price)}</span>
                 </div>
                 <p class="card-desc">${item.desc}</p>
                 <div class="card-meta">
@@ -165,7 +168,7 @@ function openItemModal(id) {
     selectedModalItem = menuItems.find(i => i.id === id);
     document.getElementById("modalImg").src = selectedModalItem.image;
     document.getElementById("modalTitle").textContent = selectedModalItem.name;
-    document.getElementById("modalPrice").textContent = `$${selectedModalItem.price.toFixed(2)}`;
+    document.getElementById("modalPrice").textContent = formatPrice(selectedModalItem.price);
     document.getElementById("modalDesc").textContent = selectedModalItem.desc;
     document.getElementById("specialNote").value = "";
     document.getElementById("itemModal").classList.add("active");
@@ -245,7 +248,7 @@ function updateLiveDrawer() {
                     <div>
                         <strong>${item.name}</strong>
                         <div style="font-size:12px; color:#9ca3af;">${item.size} ${item.note ? `• ${item.note}` : ""}</div>
-                        <div style="color:#ff5722; font-weight:600;">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div style="color:#ff5722; font-weight:600;">${formatPrice(item.price * item.quantity)}</div>
                     </div>
                     <div style="display:flex; align-items:center; gap:8px;">
                         <button onclick="updateDrawerQty(${idx}, -1)" style="padding:2px 8px;">-</button>
@@ -258,12 +261,12 @@ function updateLiveDrawer() {
     }
 
     const subtotal = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    const tax = subtotal * 0.08;
+    const tax = Math.round(subtotal * 0.08);
     const total = subtotal + tax;
 
-    document.getElementById("drawerSubtotal").textContent = `$${subtotal.toFixed(2)}`;
-    document.getElementById("drawerTax").textContent = `$${tax.toFixed(2)}`;
-    document.getElementById("drawerTotal").textContent = `$${total.toFixed(2)}`;
+    document.getElementById("drawerSubtotal").textContent = formatPrice(subtotal);
+    document.getElementById("drawerTax").textContent = formatPrice(tax);
+    document.getElementById("drawerTotal").textContent = formatPrice(total);
 }
 
 function updateDrawerQty(index, delta) {
