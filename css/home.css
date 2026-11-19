@@ -1,0 +1,424 @@
+/* =================================
+   FLAVOR HUB - HOME PAGE CSS
+================================= */
+
+/* Hero Section */
+
+.home-tagline {
+    color: var(--primary) !important;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 15px 0 !important;
+}
+
+.home-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+}
+
+.home-buttons .primary-btn,
+.home-buttons .secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* Common Section Heading */
+
+.home-categories,
+.home-popular {
+    margin-bottom: 55px;
+}
+
+.home-section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.home-section-heading h2 {
+    font-size: 26px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+.home-section-heading p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.home-subtitle {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.home-section-heading > a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.home-section-heading > a:hover {
+    color: #ff8a65;
+}
+
+
+/* Category Cards */
+
+.home-category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.home-category-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 25px 18px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: 0.25s;
+}
+
+.home-category-card i {
+    font-size: 32px;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.home-category-card h3 {
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.home-category-card p {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.home-category-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+
+/* Popular Food Grid */
+
+.home-food-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.home-food-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: 0.25s;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-food-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+}
+
+.home-food-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.home-food-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.food-label {
+    color: #ff8a65;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.home-food-info h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.home-food-info p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 18px;
+    flex: 1;
+}
+
+.home-food-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.home-food-bottom strong {
+    color: var(--primary);
+    font-size: 16px;
+}
+
+.home-food-bottom .quick-add-btn {
+    text-decoration: none;
+    font-size: 12px;
+}
+
+
+/* Special Offer Section */
+
+.home-offer {
+    background:
+        linear-gradient(120deg,
+        rgba(15,17,21,0.95),
+        rgba(255,87,34,0.35)),
+        url('https://images.unsplash.com/photo-1547592180-85f173990554?w=1400')
+        center/cover;
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 45px;
+    margin-bottom: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.home-offer span {
+    color: #ff8a65;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.home-offer h2 {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.home-offer p {
+    color: #d1d5db;
+    margin-bottom: 20px;
+}
+
+.offer-icon {
+    font-size: 100px;
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+
+/* Footer */
+
+.home-footer {
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    padding: 35px 20px;
+    text-align: center;
+}
+
+.home-footer h2 {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.home-footer h2 span {
+    color: var(--primary);
+}
+
+.home-footer p {
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+
+/* =================================
+   TABLET RESPONSIVENESS
+================================= */
+
+@media (max-width: 992px) {
+
+    .home-food-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .home-category-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-container {
+        flex-wrap: wrap;
+    }
+
+    .nav-search {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =================================
+   MOBILE RESPONSIVENESS
+================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 22px 15px;
+    }
+
+    .nav-container {
+        padding: 12px 15px;
+        gap: 12px;
+    }
+
+    .brand {
+        font-size: 20px;
+    }
+
+    .nav-search {
+        order: 3;
+        flex-basis: 100%;
+    }
+
+    .nav-links {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+
+    .cart-trigger-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .hero-banner {
+        padding: 40px 18px;
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .hero-stats {
+        gap: 12px;
+        flex-direction: column;
+        font-size: 12px;
+    }
+
+    .home-buttons {
+        flex-direction: column;
+    }
+
+    .home-buttons a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .home-section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .home-section-heading h2 {
+        font-size: 22px;
+    }
+
+    .home-category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .home-category-card {
+        padding: 20px 10px;
+    }
+
+    .home-category-card i {
+        font-size: 27px;
+    }
+
+    .home-category-card h3 {
+        font-size: 14px;
+    }
+
+    .home-category-card p {
+        font-size: 11px;
+    }
+
+    .home-food-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .home-food-card img {
+        height: 210px;
+    }
+
+    .home-offer {
+        padding: 28px 20px;
+    }
+
+    .home-offer h2 {
+        font-size: 22px;
+    }
+
+    .offer-icon {
+        display: none;
+    }
+
+}
+
+
+/* Small Mobile Screens */
+
+@media (max-width: 380px) {
+
+    .home-category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .brand {
+        font-size: 17px;
+    }
+
+}
