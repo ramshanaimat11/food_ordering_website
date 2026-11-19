@@ -1,0 +1,49 @@
+/* Flavor Hub - responsive layout */
+@media (max-width: 1050px) {
+  .nav-container { gap: 16px; }
+  .main-nav { gap: 15px; }
+  .food-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .food-image { height: 220px; }
+}
+@media (max-width: 760px) {
+  .nav-container { width: min(100% - 32px, var(--max-width)); min-height: 65px; flex-wrap: wrap; }
+  .brand { font-size: 19px; }
+  .search-box { order: 3; width: 100%; margin: 0 0 12px; }
+  .menu-toggle { display: block; margin-left: auto; }
+  .main-nav { display: none; order: 4; width: 100%; flex-direction: column; align-items: stretch; gap: 0; padding: 5px 0 12px; }
+  .main-nav.open { display: flex; }
+  .main-nav a { padding: 10px 5px; }
+  .main-nav .cart-link { justify-content: center; margin-top: 5px; }
+  .profile-link { text-align: center; }
+  .hero { min-height: 500px; background-position: 58% center; }
+  .hero-shade { background: linear-gradient(90deg, rgba(10,11,14,.94), rgba(10,11,14,.72)); }
+  .hero-content, .content-section { width: calc(100% - 32px); }
+  .hero-content { padding: 42px 0; }
+  .hero h1 { font-size: clamp(34px, 9vw, 48px); }
+  .hero-description { font-size: 14px; }
+  .hero-stats { gap: 17px; }
+  .hero-stats strong { font-size: 11px; }
+  .hero-stats small { font-size: 10px; }
+  .categories-section { padding-top: 32px; }
+  .popular-section { padding-top: 38px; }
+  .section-heading { align-items: flex-start; }
+  .section-heading h2 { font-size: 23px; }
+  .view-link { padding-top: 18px; font-size: 11px; }
+  .category-row { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; }
+  .category-pill { flex: 0 0 auto; font-size: 12px; }
+  .food-image { height: 190px; }
+  .promo { align-items: flex-start; flex-direction: column; padding: 24px; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 530px; }
+  .offer-label { font-size: 9px; }
+  .hero h1 { font-size: 35px; }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .food-grid { grid-template-columns: 1fr; gap: 16px; }
+  .food-image { height: 220px; }
+  .food-details p { min-height: 0; }
+  .section-heading { gap: 8px; }
+  .section-heading h2 { font-size: 21px; }
+  .view-link { max-width: 90px; text-align: right; }
+  .promo h2 { font-size: 20px; }
+}
