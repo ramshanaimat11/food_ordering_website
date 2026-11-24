@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History | Food Hub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="brand"><i class="fas fa-fire-flame-curved"></i> FOOD<span>HUB</span></a>
+            <nav class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="order-history.html" class="active">Orders</a>
+                <button class="cart-trigger-btn" onclick="window.location.href='cart.html'">
+                    <i class="fas fa-shopping-bag"></i> Cart <span class="badge">0</span>
+                </button>
+                <a href="profile.html"><i class="fas fa-user"></i></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 900px;">
+        <div class="account-card">
+            <h2><i class="fas fa-history" style="color:var(--primary); margin-right:8px;"></i> Your Order History</h2>
+            <div id="ordersListContainer"></div>
+        </div>
+    </main>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/orders.js"></script>
+</body>
+</html>

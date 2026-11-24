@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Food Hub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="brand"><i class="fas fa-fire-flame-curved"></i> FOOD<span>HUB</span> <small style="font-size:12px; color:var(--text-muted);">ADMIN</small></a>
+            <nav class="nav-links">
+                <a href="home.html">Storefront</a>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="profile.html"><i class="fas fa-user"></i></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 style="margin-bottom: 20px;">Restaurant Operations Dashboard</h1>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div>
+                    <span style="color:var(--text-muted); font-size:13px;">Total Orders</span>
+                    <h3 id="statOrders">0</h3>
+                </div>
+                <i class="fas fa-shopping-bag"></i>
+            </div>
+            <div class="stat-box">
+                <div>
+                    <span style="color:var(--text-muted); font-size:13px;">Total Revenue</span>
+                    <h3 id="statRevenue">Rs. 0</h3>
+                </div>
+                <i class="fas fa-rupee-sign"></i>
+            </div>
+            <div class="stat-box">
+                <div>
+                    <span style="color:var(--text-muted); font-size:13px;">Registered Customers</span>
+                    <h3 id="statUsers">0</h3>
+                </div>
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+
+        <div class="admin-table-wrap">
+            <h2>Live Customer Orders</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total (Rs.)</th>
+                        <th>Status</th>
+                        <th>Tracker</th>
+                    </tr>
+                </thead>
+                <tbody id="adminOrdersBody"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/storage.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

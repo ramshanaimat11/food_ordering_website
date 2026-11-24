@@ -1,0 +1,38 @@
+// js/profile.js
+document.addEventListener("DOMContentLoaded", () => {
+    const user = Session.requireAuth();
+    if (!user) return;
+
+    document.getElementById("sidebarUserName").textContent = user.name;
+    document.getElementById("sidebarUserEmail").textContent = user.email;
+    document.getElementById("userAvatarInitial").textContent = user.name.charAt(0).toUpperCase();
+
+    document.getElementById("profName").value = user.name;
+    document.getElementById("profEmail").value = user.email;
+    document.getElementById("profPhone").value = user.phone || "";
+
+    document.getElementById("profileForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const updatedName = Security.sanitize(document.getElementById("profName").value.trim());
+        const updatedPhone = Security.sanitize(document.getElementById("profPhone").value.trim());
+
+        if (!Validator.isValidName(updatedName)) return showGlobalToast("Enter a valid name.", true);
+        if (!Validator.isValidPhone(updatedPhone)) return showGlobalToast("Enter a valid phone number.", true);
+
+        const users = StorageManager.getUsers();
+        const idx = users.findIndex(u => u.email === user.email);
+        if (idx !== -1) {
+            users[idx].name = updatedName;
+            users[idx].phone = updatedPhone;
+            StorageManager.saveUsers(users);
+        }
+
+        user.name = updatedName;
+        user.phone = updatedPhone;
+        StorageManager.setCurrentUser(user);
+        document.getElementById("sidebarUserName").textContent = updatedName;
+        showGlobalToast("Profile updated successfully!");
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", Session.logout);
+});

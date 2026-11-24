@@ -1,0 +1,59 @@
+// js/tracking.js
+document.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const targetId = params.get("id") || localStorage.getItem("fh_activeOrderId");
+    const orders = StorageManager.getOrders();
+    const order = orders.find(o => o.orderId === targetId) || orders[0];
+
+    const trackingBox = document.getElementById("trackingDetailsBox");
+
+    if (!order) {
+        trackingBox.innerHTML = `<p style="color:var(--text-muted);">No active order found. <a href="menu.html" style="color:var(--primary);">Order now</a></p>`;
+        return;
+    }
+
+    const statusToStep = {
+        "Order Placed": 1,
+        "Preparing": 2,
+        "Out for Delivery": 3,
+        "Delivered": 4
+    };
+    const currentStep = statusToStep[order.status] || 2;
+
+    trackingBox.innerHTML = `
+        <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+            <div>
+                <span style="color:var(--text-muted); font-size:13px;">Order ID</span>
+                <h2 style="color:var(--primary); border:none; padding:0; margin:0;">${order.orderId}</h2>
+            </div>
+            <div>
+                <span style="color:var(--text-muted); font-size:13px;">Estimated Delivery</span>
+                <p style="font-weight:700;">25 - 35 Mins</p>
+            </div>
+        </div>
+
+        <div class="tracker-steps">
+            <div class="tracker-step ${currentStep >= 1 ? "completed" : ""}">
+                <i class="fas fa-receipt"></i>
+                <strong>Order Confirmed</strong>
+            </div>
+            <div class="tracker-step ${currentStep >= 2 ? "completed" : ""}">
+                <i class="fas fa-fire-burner"></i>
+                <strong>Preparing Food</strong>
+            </div>
+            <div class="tracker-step ${currentStep >= 3 ? "completed" : ""}">
+                <i class="fas fa-motorcycle"></i>
+                <strong>Out for Delivery</strong>
+            </div>
+            <div class="tracker-step ${currentStep >= 4 ? "completed" : ""}">
+                <i class="fas fa-house-circle-check"></i>
+                <strong>Delivered</strong>
+            </div>
+        </div>
+
+        <div style="background:var(--bg-elevated); padding:16px; border-radius:10px; font-size:14px;">
+            <p><strong>Delivering To:</strong> ${order.customerName} — ${order.address}</p>
+            <p style="margin-top:6px;"><strong>Payment:</strong> ${order.paymentMethod} | <strong>Total Payable:</strong> <span style="color:var(--primary); font-weight:700;">Rs. ${Math.round(order.total).toLocaleString()}</span></p>
+        </div>
+    `;
+});

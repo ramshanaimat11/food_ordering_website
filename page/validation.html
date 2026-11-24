@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Validation & Security | Food Hub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/validation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="brand">
+                <i class="fas fa-fire-flame-curved"></i> FOOD<span>HUB</span>
+            </a>
+            <nav class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="profile.html">Profile</a>
+                <a href="validation.html" class="active">Security</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Validation Container -->
+    <main class="auth-wrapper">
+        <div class="auth-card validation-card">
+            <div class="auth-header">
+                <i class="fas fa-shield-halved"></i>
+                <h1>Security & Input Validation</h1>
+                <p>Verify your account credentials and test real-time input rules</p>
+            </div>
+
+            <form id="securityValidationForm" novalidate>
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="valName">Full Name (Letters only, min 3 chars)</label>
+                    <div class="input-icon-wrap">
+                        <input type="text" id="valName" data-validate="name" placeholder="e.g. Ayesha Khan" required>
+                        <i class="fas fa-circle-check status-icon"></i>
+                    </div>
+                    <small class="error-text" id="valNameError"></small>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="valEmail">Email Address</label>
+                    <div class="input-icon-wrap">
+                        <input type="email" id="valEmail" data-validate="email" placeholder="name@example.com" required>
+                        <i class="fas fa-circle-check status-icon"></i>
+                    </div>
+                    <small class="error-text" id="valEmailError"></small>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="valPhone">Phone Number (Pakistan Format)</label>
+                    <div class="input-icon-wrap">
+                        <input type="tel" id="valPhone" data-validate="phone" placeholder="0300-1234567" required>
+                        <i class="fas fa-circle-check status-icon"></i>
+                    </div>
+                    <small class="error-text" id="valPhoneError"></small>
+                </div>
+
+                <!-- Password + Strength Meter -->
+                <div class="form-group">
+                    <label for="valPassword">Strong Password</label>
+                    <div class="input-icon-wrap">
+                        <input type="password" id="valPassword" data-validate="password" placeholder="Min 6 chars, 1 number & 1 special char" required>
+                        <i class="fas fa-circle-check status-icon"></i>
+                    </div>
+                    <div class="strength-bar-wrap">
+                        <div class="strength-bar" id="passwordStrengthBar"></div>
+                    </div>
+                    <small class="strength-label" id="passwordStrengthText">Password strength: Not entered</small>
+                    <small class="error-text" id="valPasswordError"></small>
+                </div>
+
+                <!-- Security Rules Checklist -->
+                <div class="security-checklist">
+                    <div class="check-item" id="ruleLength"><i class="fas fa-circle"></i> At least 6 characters</div>
+                    <div class="check-item" id="ruleNumber"><i class="fas fa-circle"></i> Contains at least 1 number</div>
+                    <div class="check-item" id="ruleSpecial"><i class="fas fa-circle"></i> Contains 1 special character (!@#$%)</div>
+                </div>
+
+                <button type="submit" class="primary-btn full-width">
+                    <i class="fas fa-check-double"></i> Validate & Verify Details
+                </button>
+            </form>
+
+            <div id="validationResultBox" class="validation-result" style="display: none;"></div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/security.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/validation.js"></script>
+</body>
+</html>

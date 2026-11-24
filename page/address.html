@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery Addresses | Food Hub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="brand"><i class="fas fa-fire-flame-curved"></i> FOOD<span>HUB</span></a>
+            <nav class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="order-history.html">Orders</a>
+                <button class="cart-trigger-btn" onclick="window.location.href='cart.html'">
+                    <i class="fas fa-shopping-bag"></i> Cart <span class="badge">0</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container account-layout">
+        <aside class="account-sidebar">
+            <div class="user-mini-card">
+                <div class="user-avatar" id="userAvatarInitial">U</div>
+                <h3 id="sidebarUserName">User</h3>
+                <p id="sidebarUserEmail" style="font-size:12px; color:var(--text-muted);"></p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                <a href="address.html" class="active"><i class="fas fa-map-marker-alt"></i> Saved Addresses</a>
+                <a href="order-history.html"><i class="fas fa-receipt"></i> Order History</a>
+                <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </nav>
+        </aside>
+
+        <section>
+            <div class="account-card">
+                <h2><i class="fas fa-plus-circle" style="color:var(--primary); margin-right:8px;"></i> Add New Delivery Address</h2>
+                <form id="addressForm">
+                    <div class="form-group">
+                        <label for="addrLabel">Address Label (e.g., Home, Office)</label>
+                        <input type="text" id="addrLabel" placeholder="Home" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="addrStreet">Street Address</label>
+                        <input type="text" id="addrStreet" placeholder="House 14, Block B, Johar Town" required>
+                    </div>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                        <div class="form-group">
+                            <label for="addrCity">City</label>
+                            <input type="text" id="addrCity" placeholder="Lahore" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addrPostal">Postal Code</label>
+                            <input type="text" id="addrPostal" placeholder="54000" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="primary-btn">Save Address</button>
+                </form>
+            </div>
+
+            <div class="account-card">
+                <h2>Saved Delivery Addresses</h2>
+                <div class="address-grid" id="addressList"></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast"></div>
+    <script src="../js/storage.js"></script>
+    <script src="../js/security.js"></script>
+    <script src="../js/session.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/address.js"></script>
+</body>
+</html>

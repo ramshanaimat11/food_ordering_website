@@ -1,0 +1,81 @@
+// js/address.js
+document.addEventListener("DOMContentLoaded", () => {
+    const user = Session.requireAuth();
+    if (!user) return;
+
+    document.getElementById("sidebarUserName").textContent = user.name;
+    document.getElementById("sidebarUserEmail").textContent = user.email;
+    document.getElementById("userAvatarInitial").textContent = user.name.charAt(0).toUpperCase();
+    document.getElementById("logoutBtn").addEventListener("click", Session.logout);
+
+    const addressListEl = document.getElementById("addressList");
+    const addressForm = document.getElementById("addressForm");
+
+    function renderAddresses() {
+        const list = StorageManager.getAddresses(user.email);
+        addressListEl.innerHTML = "";
+
+        if (list.length === 0) {
+            addressListEl.innerHTML = `<p style="color:var(--text-muted);">No saved addresses yet. Add one above!</p>`;
+            return;
+        }
+
+        list.forEach((addr, idx) => {
+            addressListEl.innerHTML += `
+                <div class="address-item ${addr.isDefault ? "default" : ""}">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <strong>${addr.label}</strong>
+                        ${addr.isDefault ? `<span class="default-badge">Default</span>` : ""}
+                    </div>
+                    <p style="font-size:14px; color:#d1d5db;">${addr.street}</p>
+                    <p style="font-size:13px; color:var(--text-muted);">${addr.city} - ${addr.postalCode}</p>
+                    <div class="address-actions">
+                        ${!addr.isDefault ? `<button class="customize-btn" onclick="setDefaultAddress(${idx})">Set Default</button>` : ""}
+                        <button class="text-danger-btn" onclick="deleteAddress(${idx})"><i class="fas fa-trash"></i> Remove</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    addressForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const label = Security.sanitize(document.getElementById("addrLabel").value.trim());
+        const street = Security.sanitize(document.getElementById("addrStreet").value.trim());
+        const city = Security.sanitize(document.getElementById("addrCity").value.trim());
+        const postalCode = Security.sanitize(document.getElementById("addrPostal").value.trim());
+
+        const list = StorageManager.getAddresses(user.email);
+        list.push({
+            label,
+            street,
+            city,
+            postalCode,
+            isDefault: list.length === 0
+        });
+        StorageManager.saveAddresses(user.email, list);
+        addressForm.reset();
+        renderAddresses();
+        showGlobalToast("Delivery address saved!");
+    });
+
+    window.setDefaultAddress = function (index) {
+        const list = StorageManager.getAddresses(user.email).map((a, i) => ({
+            ...a,
+            isDefault: i === index
+        }));
+        StorageManager.saveAddresses(user.email, list);
+        renderAddresses();
+        showGlobalToast("Default address updated!");
+    };
+
+    window.deleteAddress = function (index) {
+        const list = StorageManager.getAddresses(user.email);
+        list.splice(index, 1);
+        StorageManager.saveAddresses(user.email, list);
+        renderAddresses();
+        showGlobalToast("Address deleted.");
+    };
+
+    renderAddresses();
+});

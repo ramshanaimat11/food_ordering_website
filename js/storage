@@ -1,0 +1,30 @@
+// js/storage.js
+(function initFreshSessionCart() {
+    if (!sessionStorage.getItem("foodHubActiveVisit")) {
+        localStorage.removeItem("foodCart");
+        localStorage.removeItem("orderSummary");
+        sessionStorage.setItem("foodHubActiveVisit", "true");
+    }
+})();
+
+const StorageManager = {
+    getUsers: () => JSON.parse(localStorage.getItem("fh_users")) || [],
+    saveUsers: (users) => localStorage.setItem("fh_users", JSON.stringify(users)),
+
+    getCurrentUser: () => JSON.parse(localStorage.getItem("fh_currentUser")) || null,
+    setCurrentUser: (user) => localStorage.setItem("fh_currentUser", JSON.stringify(user)),
+    clearCurrentUser: () => localStorage.removeItem("fh_currentUser"),
+
+    getAddresses: (email) => {
+        const all = JSON.parse(localStorage.getItem("fh_addresses")) || {};
+        return all[email] || [];
+    },
+    saveAddresses: (email, list) => {
+        const all = JSON.parse(localStorage.getItem("fh_addresses")) || {};
+        all[email] = list;
+        localStorage.setItem("fh_addresses", JSON.stringify(all));
+    },
+
+    getOrders: () => JSON.parse(localStorage.getItem("fh_orders")) || [],
+    saveOrders: (orders) => localStorage.setItem("fh_orders", JSON.stringify(orders))
+};

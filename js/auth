@@ -1,0 +1,69 @@
+// js/auth.js
+document.addEventListener("DOMContentLoaded", () => {
+    const registerForm = document.getElementById("registerForm");
+    const loginForm = document.getElementById("loginForm");
+
+    if (registerForm) {
+        registerForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const name = Security.sanitize(document.getElementById("regName").value.trim());
+            const email = document.getElementById("regEmail").value.trim().toLowerCase();
+            const phone = Security.sanitize(document.getElementById("regPhone").value.trim());
+            const password = document.getElementById("regPassword").value;
+            const confirm = document.getElementById("regConfirmPassword").value;
+
+            if (!Validator.isValidName(name)) return showGlobalToast("Name must be at least 3 characters.", true);
+            if (!Validator.isValidEmail(email)) return showGlobalToast("Enter a valid email address.", true);
+            if (!Validator.isValidPhone(phone)) return showGlobalToast("Enter a valid phone number.", true);
+            if (!Validator.isStrongPassword(password)) return showGlobalToast("Password must be at least 6 characters.", true);
+            if (password !== confirm) return showGlobalToast("Passwords do not match.", true);
+
+            const users = StorageManager.getUsers();
+            if (users.some(u => u.email === email)) {
+                return showGlobalToast("An account with this email already exists.", true);
+            }
+
+            const newUser = {
+                name,
+                email,
+                phone,
+                passwordHash: Security.hashPassword(password),
+                role: email === "admin@foodhub.com" ? "admin" : "customer"
+            };
+
+            users.push(newUser);
+            StorageManager.saveUsers(users);
+            Session.create(newUser);
+
+            showGlobalToast("Account created! Welcome to Food Hub.");
+            setTimeout(() => window.location.href = "home.html", 1000);
+        });
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+            const password = document.getElementById("loginPassword").value;
+
+            // Built-in demo admin shortcut
+            if (email === "admin@foodhub.com" && password === "admin123") {
+                Session.create({ name: "Admin Manager", email, phone: "0300-0000000", role: "admin" });
+                showGlobalToast("Logged in as Admin!");
+                setTimeout(() => window.location.href = "dashboard.html", 900);
+                return;
+            }
+
+            const users = StorageManager.getUsers();
+            const matched = users.find(u => u.email === email && u.passwordHash === Security.hashPassword(password));
+
+            if (!matched) {
+                return showGlobalToast("Invalid email or password.", true);
+            }
+
+            Session.create(matched);
+            showGlobalToast(`Welcome back, ${matched.name}!`);
+            setTimeout(() => window.location.href = "home.html", 900);
+        });
+    }
+});

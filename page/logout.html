@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out | Food Hub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/logout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="brand">
+                <i class="fas fa-fire-flame-curved"></i> FOOD<span>HUB</span>
+            </a>
+            <nav class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Logout Confirmation Card -->
+    <main class="auth-wrapper">
+        <div class="auth-card logout-card">
+            <div class="logout-icon-circle">
+                <i class="fas fa-right-from-bracket"></i>
+            </div>
+
+            <h1 id="logoutHeading">You've Been Logged Out</h1>
+            <p id="logoutSubtext" class="logout-desc">
+                Your Food Hub session has ended safely. Thanks for ordering with us!
+            </p>
+
+            <div class="logout-summary-box">
+                <span><i class="fas fa-shield-check"></i> Session & local cart cleared for your security</span>
+            </div>
+
+            <div class="logout-actions">
+                <a href="login.html" class="primary-btn full-width">
+                    <i class="fas fa-sign-in-alt"></i> Sign In Again
+                </a>
+                <a href="home.html" class="secondary-btn full-width">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/logout.js"></script>
+</body>
+</html>

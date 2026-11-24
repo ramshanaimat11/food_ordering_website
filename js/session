@@ -1,0 +1,32 @@
+// js/session.js
+const Session = {
+    create(user) {
+        const sessionData = {
+            token: Security.generateToken(),
+            user: {
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                role: user.role || "customer"
+            },
+            loginTime: Date.now()
+        };
+        localStorage.setItem("fh_session", JSON.stringify(sessionData));
+        StorageManager.setCurrentUser(sessionData.user);
+    },
+
+    requireAuth() {
+        const user = StorageManager.getCurrentUser();
+        if (!user) {
+            window.location.href = "login.html";
+            return null;
+        }
+        return user;
+    },
+
+    logout() {
+        localStorage.removeItem("fh_session");
+        StorageManager.clearCurrentUser();
+        window.location.href = "login.html";
+    }
+};

@@ -1,0 +1,29 @@
+// js/main.js
+document.addEventListener("DOMContentLoaded", () => {
+    const cart = JSON.parse(localStorage.getItem("foodCart")) || [];
+    const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    document.querySelectorAll(".badge, #navCartCount").forEach(badge => {
+        badge.textContent = totalQty;
+    });
+
+    const user = StorageManager.getCurrentUser();
+    const profileLinks = document.querySelectorAll('a[href="profile.html"]');
+    profileLinks.forEach(link => {
+        if (user) {
+            link.innerHTML = `<i class="fas fa-user-check" style="color: var(--primary);"></i> ${user.name.split(" ")[0]}`;
+        } else {
+            link.href = "login.html";
+            link.innerHTML = `<i class="fas fa-user"></i> Login`;
+        }
+    });
+});
+
+function showGlobalToast(message, isError = false) {
+    const toast = document.getElementById("toast");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.style.background = isError ? "#ef4444" : "var(--success)";
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2600);
+}

@@ -1,0 +1,169 @@
+// js/validation.js
+const Validator = {
+    isValidName(name) {
+        return /^[A-Za-z\s]{3,40}$/.test(name.trim());
+    },
+
+    isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
+    },
+
+    isValidPhone(phone) {
+        return /^(\+92|0)?3[0-9]{2}[-\s]?[0-9]{7}$/.test(phone.trim()) || /^[0-9+\-\s]{10,15}$/.test(phone.trim());
+    },
+
+    isValidPostalCode(code) {
+        return /^[0-9]{4,6}$/.test(code.trim());
+    },
+
+    isStrongPassword(password) {
+        return password.length >= 6;
+    },
+
+    getPasswordScore(password) {
+        let score = 0;
+        const hasLength = password.length >= 6;
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+        if (hasLength) score++;
+        if (hasNumber) score++;
+        if (hasSpecial) score++;
+
+        return { score, hasLength, hasNumber, hasSpecial };
+    },
+
+    sanitizeInput(value) {
+        return value.replace(/<[^>]*>?/gm, "").trim();
+    }
+};
+
+// Live UI Validation Handler
+document.addEventListener("DOMContentLoaded", () => {
+    const valForm = document.getElementById("securityValidationForm");
+    if (!valForm) return;
+
+    const nameInput = document.getElementById("valName");
+    const emailInput = document.getElementById("valEmail");
+    const phoneInput = document.getElementById("valPhone");
+    const passInput = document.getElementById("valPassword");
+
+    function setFieldState(inputEl, errorElId, isValid, errorMessage) {
+        const errorEl = document.getElementById(errorElId);
+        const iconEl = inputEl.parentElement.querySelector(".status-icon");
+
+        if (isValid) {
+            inputEl.classList.remove("input-invalid");
+            inputEl.classList.add("input-valid");
+            if (iconEl) iconEl.className = "fas fa-circle-check status-icon";
+            if (errorEl) errorEl.textContent = "";
+        } else {
+            inputEl.classList.remove("input-valid");
+            inputEl.classList.add("input-invalid");
+            if (iconEl) iconEl.className = "fas fa-circle-exclamation status-icon";
+            if (errorEl) errorEl.textContent = errorMessage;
+        }
+        return isValid;
+    }
+
+    function checkName() {
+        return setFieldState(
+            nameInput,
+            "valNameError",
+            Validator.isValidName(nameInput.value),
+            "Name must be at least 3 letters (no numbers or symbols)."
+        );
+    }
+
+    function checkEmail() {
+        return setFieldState(
+            emailInput,
+            "valEmailError",
+            Validator.isValidEmail(emailInput.value),
+            "Please enter a valid email address (e.g. user@foodhub.com)."
+        );
+    }
+
+    function checkPhone() {
+        return setFieldState(
+            phoneInput,
+            "valPhoneError",
+            Validator.isValidPhone(phoneInput.value),
+            "Enter a valid mobile number (e.g. 0300-1234567)."
+        );
+    }
+
+    function updateRuleItem(id, passed) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const icon = el.querySelector("i");
+        if (passed) {
+            el.classList.add("passed");
+            if (icon) icon.className = "fas fa-check-circle";
+        } else {
+            el.classList.remove("passed");
+            if (icon) icon.className = "fas fa-circle";
+        }
+    }
+
+    function checkPassword() {
+        const val = passInput.value;
+        const { score, hasLength, hasNumber, hasSpecial } = Validator.getPasswordScore(val);
+
+        updateRuleItem("ruleLength", hasLength);
+        updateRuleItem("ruleNumber", hasNumber);
+        updateRuleItem("ruleSpecial", hasSpecial);
+
+        const bar = document.getElementById("passwordStrengthBar");
+        const label = document.getElementById("passwordStrengthText");
+
+        if (val.length === 0) {
+            bar.style.width = "0%";
+            label.textContent = "Password strength: Not entered";
+        } else if (score === 1) {
+            bar.style.width = "33%";
+            bar.style.background = "#ef4444";
+            label.textContent = "Password strength: Weak";
+        } else if (score === 2) {
+            bar.style.width = "66%";
+            bar.style.background = "#f59e0b";
+            label.textContent = "Password strength: Medium";
+        } else if (score === 3) {
+            bar.style.width = "100%";
+            bar.style.background = "#10b981";
+            label.textContent = "Password strength: Strong";
+        }
+
+        return setFieldState(
+            passInput,
+            "valPasswordError",
+            score === 3,
+            "Password must satisfy all 3 security rules below."
+        );
+    }
+
+    nameInput.addEventListener("input", checkName);
+    emailInput.addEventListener("input", checkEmail);
+    phoneInput.addEventListener("input", checkPhone);
+    passInput.addEventListener("input", checkPassword);
+
+    valForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const validAll = checkName() & checkEmail() & checkPhone() & checkPassword();
+        const resultBox = document.getElementById("validationResultBox");
+
+        if (validAll) {
+            const cleanName = Validator.sanitizeInput(nameInput.value);
+            resultBox.style.display = "block";
+            resultBox.innerHTML = `<i class="fas fa-shield-check"></i> <strong>All Inputs Validated!</strong> Data for <strong>${cleanName}</strong> passed XSS sanitization and security checks.`;
+            if (typeof showGlobalToast === "function") {
+                showGlobalToast("All inputs passed security validation!");
+            }
+        } else {
+            resultBox.style.display = "none";
+            if (typeof showGlobalToast === "function") {
+                showGlobalToast("Please fix the highlighted fields.", true);
+            }
+        }
+    });
+});

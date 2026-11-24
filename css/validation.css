@@ -1,0 +1,121 @@
+/* css/validation.css */
+.validation-card {
+    max-width: 500px;
+}
+
+.input-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon-wrap input {
+    padding-right: 38px;
+}
+
+.status-icon {
+    position: absolute;
+    right: 12px;
+    font-size: 16px;
+    opacity: 0;
+    transition: 0.2s ease;
+    pointer-events: none;
+}
+
+/* Valid & Invalid Field States */
+input.input-valid {
+    border-color: var(--success) !important;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
+}
+
+input.input-valid + .status-icon {
+    opacity: 1;
+    color: var(--success);
+}
+
+input.input-invalid {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.15);
+}
+
+input.input-invalid + .status-icon {
+    opacity: 1;
+    color: #ef4444;
+}
+
+.error-text {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 5px;
+    min-height: 16px;
+    display: block;
+}
+
+/* Password Strength Meter */
+.strength-bar-wrap {
+    width: 100%;
+    height: 6px;
+    background: var(--bg-elevated);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0%;
+    background: #ef4444;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.strength-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Security Checklist */
+.security-checklist {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.check-item {
+    font-size: 13px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.check-item i {
+    font-size: 10px;
+}
+
+.check-item.passed {
+    color: var(--success);
+}
+
+.check-item.passed i {
+    font-size: 13px;
+}
+
+/* Verification Result Banner */
+.validation-result {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 10px;
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid var(--success);
+    color: #d1fae5;
+    font-size: 13px;
+    text-align: center;
+}
