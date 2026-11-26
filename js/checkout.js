@@ -7,15 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const checkoutTotal = document.getElementById("checkoutTotal");
     const placeOrderBtn = document.getElementById("placeOrderBtn");
 
-    // Get Cart Data
-    let cart = JSON.parse(localStorage.getItem("foodCart")) || [];
+    // Get Cart Data (Using sessionStorage so old cart clears when browser/tab closes)
+    let cart = JSON.parse(sessionStorage.getItem("foodCart")) || [];
 
     // Get Order Summary
-    let summary = JSON.parse(localStorage.getItem("orderSummary")) || {};
+    let summary = JSON.parse(sessionStorage.getItem("orderSummary")) || {};
 
     // Currency Formatter
     function formatPrice(amount) {
-        return "Rs. " + Number(amount).toFixed(2);
+        return "Rs. " + Math.round(Number(amount)).toLocaleString();
     }
 
     // Display Order Summary
@@ -62,10 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (!Number.isFinite(savedSubtotal) ||
             savedSubtotal !== subtotal) {
-            summary.subtotal = subtotal.toFixed(2);
-            summary.tax = (subtotal * 0.08).toFixed(2);
-            summary.deliveryFee = "0.00";
-            summary.discount = "0.00";
+            summary.subtotal = Math.round(subtotal);
+            summary.tax = Math.round(subtotal * 0.08);
+            summary.deliveryFee = 0;
+            summary.discount = 0;
         }
 
         const tax = Number(summary.tax) || 0;
@@ -77,9 +77,9 @@ document.addEventListener("DOMContentLoaded", function () {
         checkoutTotal.textContent = formatPrice(total);
 
         // Save Updated Summary
-        summary.total = total.toFixed(2);
+        summary.total = Math.round(total);
 
-        localStorage.setItem(
+        sessionStorage.setItem(
             "orderSummary",
             JSON.stringify(summary)
         );
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
             status: "Pending"
         };
 
-        // Save Order in LocalStorage
+        // Save Order in LocalStorage (so Order History stays saved)
         let orders = JSON.parse(localStorage.getItem("foodOrders")) || [];
 
         orders.push(order);
@@ -159,7 +159,9 @@ document.addEventListener("DOMContentLoaded", function () {
             JSON.stringify(orders)
         );
 
-        // Clear Cart
+        // Clear Cart completely from both sessionStorage and localStorage
+        sessionStorage.removeItem("foodCart");
+        sessionStorage.removeItem("orderSummary");
         localStorage.removeItem("foodCart");
         localStorage.removeItem("orderSummary");
 
