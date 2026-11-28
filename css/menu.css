@@ -430,4 +430,36 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin-top: 15px;
+}/* --- Week 1 Day 2: Enhanced Food Card & Badge Styling --- */
+.menu-card, .food-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.menu-card:hover, .food-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+}
+
+.menu-card img, .food-card img {
+  transition: transform 0.35s ease;
+}
+
+.menu-card:hover img, .food-card:hover img {
+  transform: scale(1.05);
+}
+
+.badge, .food-badge, .dish-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.35);
 }
